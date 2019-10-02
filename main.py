@@ -4,7 +4,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from telegram import ParseMode
-from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
+from telegram.ext import CommandHandler, Updater
 
 from settings import DVMN_URL, PROXY, VERDICT
 
