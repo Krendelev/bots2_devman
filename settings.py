@@ -1,7 +1,4 @@
-PROXY = {
-    "proxy_url": "socks5://t1.learn.python.ru:1080",
-    "urllib3_proxy_kwargs": {"username": "learn", "password": "python"},
-}
+PROXY = {"proxy_url": "socks5://97.74.6.64:2015"}
 
 VERDICT = {
     True: "К сожалению, в работе нашлись ошибки.",

@@ -10,24 +10,22 @@ from settings import DVMN_URL, PROXY, VERDICT
 
 
 def get_task_status():
-    # headers = {"Authorization": f"Token {os.environ['DVMN_TOKEN']}"}
-    # timestamp = None
-    # while True:
-    #     payload = {"timestamp": timestamp}
-    #     try:
-    #         response = requests.get(DVMN_URL, headers=headers, params=payload)
-    #     except (requests.exceptions.ReadTimeout, requests.exceptions.ConnectionError):
-    #         continue
-    #     response.raise_for_status()
-    #     content = response.json()
-    #     timestamp = (
-    #         content.get("timestamp_to_request", None)
-    #         or content["last_attempt_timestamp"]
-    #     )
-    with open("_workfiles/out.json") as fh:
-        content = json.load(fh)
+    headers = {"Authorization": f"Token {os.environ['DVMN_TOKEN']}"}
+    timestamp = None
+    while True:
+        payload = {"timestamp": timestamp}
+        try:
+            response = requests.get(DVMN_URL, headers=headers, params=payload)
+        except (requests.exceptions.ReadTimeout, requests.exceptions.ConnectionError):
+            continue
+        response.raise_for_status()
+        content = response.json()
+        timestamp = (
+            content.get("timestamp_to_request", None)
+            or content["last_attempt_timestamp"]
+        )
         if content["status"] == "found":
-            yield content["new_attempts"]
+            yield from content["new_attempts"]
 
 
 def compose_message(response):
@@ -44,7 +42,6 @@ def start(update, context):
     except requests.exceptions.HTTPError as error:
         update.message.reply_text(f"Ошибка при обращении к dvmn.org – {error}")
     for task in status:
-        print(status)
         msg = compose_message(task)
         update.message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
