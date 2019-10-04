@@ -1,5 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5700d2d4ac25487f927e8bc5a00ac113)](https://www.codacy.com/manual/Krendelev/bots1_devman?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Krendelev/bots1_devman&amp;utm_campaign=Badge_Grade)
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5700d2d4ac25487f927e8bc5a00ac113)](https://www.codacy.com/manual/Krendelev/bots1_devman?utm_source=github.com&utm_medium=referral&utm_content=Krendelev/bots1_devman&utm_campaign=Badge_Grade)
 
 # Status checker
 
@@ -19,13 +18,14 @@ pip install -r requirements.txt
 Set up Telegram bot and put its token to the `.env` file.
 
 ```bash
-BOT_TOKEN=replace_with_token
+TELEGRAM_TOKEN=replace_with_token
 ```
 
-Run `main.py`.
+Run `main.py`. You can also provide proxy url if Telegram is blocked in your country.
 
 ```bash
-$ python main.py
+$ python main.py socks5://139.162.221.57:1080
+_
 ```
 
 Send `/start` to your bot.
