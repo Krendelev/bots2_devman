@@ -21,10 +21,10 @@ Set up Telegram bot and put its token to the `.env` file.
 TELEGRAM_TOKEN=replace_with_token
 ```
 
-Run `main.py`. You can also provide proxy url if Telegram is blocked in your country.
+Run `main.py`.
 
 ```bash
-$ python main.py socks5://139.162.221.57:1080
+$ python main.py
 _
 ```
 

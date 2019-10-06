@@ -1,4 +1,3 @@
-import argparse
 import logging
 import os
 
@@ -47,12 +46,6 @@ def start(update, context):
         update.message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
-def get_proxy():
-    parser = argparse.ArgumentParser(description="Telegram bot to check on devman.org")
-    parser.add_argument("URL", nargs="?", help="Proxy URL")
-    return {"proxy_url": parser.parse_args().URL}
-
-
 if __name__ == "__main__":
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(message)s",
@@ -61,10 +54,7 @@ if __name__ == "__main__":
     )
     load_dotenv()
 
-    proxy = get_proxy()
-    mybot = Updater(
-        os.environ["TELEGRAM_TOKEN"], request_kwargs=proxy, use_context=True
-    )
+    mybot = Updater(os.environ["TELEGRAM_TOKEN"], use_context=True)
 
     mybot.dispatcher.add_handler(CommandHandler("start", start))
 
