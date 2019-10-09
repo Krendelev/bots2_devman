@@ -13,8 +13,8 @@ from settings import DVMN_URL, VERDICT
 class TGHandler(logging.Handler):
     def __init__(self, token=None):
         logging.Handler.__init__(self)
-        self.token = token
 
+        self.token = token
         self.updater = Updater(self.token, use_context=True)
         self.dispatcher = self.updater.dispatcher
         self.bot = self.updater.bot
@@ -27,7 +27,7 @@ def emit(self, record):
 
 
 def start(update, context):
-    logging.info("Bot has started")
+    logger.info("Bot has been started")
     a = 5 / 0
 
     c = abc()
@@ -38,23 +38,20 @@ def abc():
     return b[2]
 
 
-def error_callback(update, context):
-    logging.warning(f"Bot encountered error: {context.error}")
-
-
 def unknown(update, context):
     update.message.reply_text(text="Sorry, I didn't understand that command.")
+
+
+def error_callback(update, context):
+    logger.error(f"Bot encountered error: {context.error}", exc_info=True)
 
 
 if __name__ == "__main__":
     load_dotenv()
 
-    # TGHandler.emit = emit
-    # logging.config.fileConfig("logging.conf")
-    # logger = logging.getLogger("loggingBot")
-    logging.basicConfig(
-        format="%(asctime)s - %(levelname)s - %(message)s", filename="bot.log"
-    )
+    TGHandler.emit = emit
+    logging.config.fileConfig("logging.conf", disable_existing_loggers=False)
+    logger = logging.getLogger("loggingBot")
 
     mybot = Updater(os.environ["TELEGRAM_TOKEN"], use_context=True)
 
@@ -64,3 +61,9 @@ if __name__ == "__main__":
 
     mybot.start_polling()
     mybot.idle()
+
+    # logging.basicConfig(
+    #     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    #     level=logging.INFO,
+    #     # filename="bot.log",
+    # )
