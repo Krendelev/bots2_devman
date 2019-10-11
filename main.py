@@ -20,10 +20,9 @@ class TgHandler(logging.Handler):
         self.bot = self.updater.bot
         self.chat_id = os.environ["DEV_CHAT_ID"]
 
-
-def emit(self, record):
-    msg = self.format(record)
-    self.bot.send_message(chat_id=self.chat_id, text=msg)
+    def emit(self, record):
+        msg = self.format(record)
+        self.bot.send_message(chat_id=self.chat_id, text=msg)
 
 
 def get_task_status(context):
@@ -78,7 +77,6 @@ def error_callback(update, context):
 if __name__ == "__main__":
     load_dotenv()
 
-    TgHandler.emit = emit
     logging.config.fileConfig("logging.conf", disable_existing_loggers=False)
     logger = logging.getLogger()
 
