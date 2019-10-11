@@ -1,5 +1,3 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5700d2d4ac25487f927e8bc5a00ac113)](https://www.codacy.com/manual/Krendelev/bots1_devman?utm_source=github.com&utm_medium=referral&utm_content=Krendelev/bots1_devman&utm_campaign=Badge_Grade)
-
 # Status checker
 
 Check if codereview for your task is ready on [dvmn.org](https://dvmn.org/).
@@ -15,10 +13,13 @@ pip install -r requirements.txt
 
 ## Usage
 
-Set up Telegram bot and put its token to the `.env` file.
+Uses two bots: one for checking on Devman and other to deliver us logfiles from the first. Set up bots and put their tokens to the `.env` file. Create chat with logger bot and write down its `id`.
 
 ```bash
+DVMN_TOKEN=replace_with_token
 TELEGRAM_TOKEN=replace_with_token
+LOGGER_TOKEN=replace_with_token
+DEV_CHAT_ID=replace_with_id
 ```
 
 Run `main.py`.
@@ -28,7 +29,7 @@ $ python main.py
 _
 ```
 
-Send `/start` to your bot.
+Send `/start` to your main bot. Quit with `Ctrl-C`.
 
 ### Project Goals
 
